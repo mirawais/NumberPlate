@@ -1,0 +1,42 @@
+I need a standalone application for a number plate customizer. The application should allow users to customize their license plates with a live preview updating in real time as they make selections. The customization options should include:
+
+Registration Number: Users will enter their vehicle registration number.
+
+Plate Selection: Users can choose between "Front Only," "Rear Only," or "Both Plates" using radio buttons.
+
+Badge Selection: Users can select a badge from the options we add in the admin panel.
+
+Badge Background Color: Users can choose a background color for the badge. The colors will be dynamically added from the admin side using hex codes instead of color names.
+
+Text Style: Users can select a text style, with specific styles managed from the admin panel.
+
+Border Color: Users can pick a border color for the plate, dynamically managed from the admin panel.
+
+Plate Surround: Users can choose a surround design from the options added in the admin.
+
+Plate Type: Users can select the type of plate, such as a "Show Plate" or an "Electric Car Plate."
+
+All these options should be dynamically managed from the admin side so that we can add, remove, or modify selections as needed.
+
+Checkout & Payment Integration:
+The app should allow users to complete their purchase through a checkout system.
+
+PayPal will be integrated as the primary payment method for order processing.
+
+The system should calculate the final price based on the selected options.
+
+Once the payment is successful, the order should be processed, and the user should receive a confirmation.
+
+Admin Panel Order Response Tab:
+Additionally, I need an extra tab in the admin panel that shows order responses when a user completes an order. This response tab should display order details in a column-wise format, including:
+
+Order ID
+
+Payment Status
+
+Quantity
+
+All custom field selections (Registration Number, Plate Type, Badges, Colors, etc.)
+
+The goal is to make the number plate customization process fully dynamic, user-friendly, and efficient, ensuring a smooth ordering experience with a live preview feature and a seamless PayPal payment system."
+
