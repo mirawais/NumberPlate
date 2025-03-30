@@ -22,9 +22,9 @@ export default function PlatePreview({
   const getTextStyleClasses = () => {
     switch (customization.textStyle) {
       case '3d':
-        return 'font-bold';
+        return 'license-plate-3d';
       case 'carbon':
-        return 'italic';
+        return 'license-plate-carbon';
       default:
         return '';
     }
@@ -41,74 +41,113 @@ export default function PlatePreview({
   };
   
   return (
-    <div className="lg:w-2/5 order-2 lg:order-1 sticky top-8 h-fit">
-      <div className="bg-white rounded-lg shadow-md p-6 mb-6">
-        <h2 className="text-xl font-semibold mb-4 text-neutral-800">Live Preview</h2>
-        <div className="bg-neutral-100 p-4 rounded-md mb-4">
+    <div className="flex flex-col items-center w-full">
+      {/* Standard white plate preview */}
+      <div className="w-full mb-4 p-2 bg-white rounded-md">
+        <div 
+          className="font-license-plate bg-white text-black border-4 rounded-md p-5 mx-auto max-w-lg flex flex-col items-center relative overflow-hidden"
+          style={{ borderColor: customization.borderColor }}
+        >
+          {/* Badge area */}
+          {customization.badge !== 'none' && (
+            <div className="absolute left-2 top-0 bottom-0 flex items-center">
+              <div 
+                className={`w-12 h-16 rounded-sm flex flex-col items-center justify-center text-xs ${badgeTextColor}`}
+                style={{ backgroundColor: customization.badgeColor }}
+              >
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Flag_of_the_United_Kingdom_%283-5%29.svg/800px-Flag_of_the_United_Kingdom_%283-5%29.svg.png" alt="UK Flag" className="w-9 h-5 mb-1" />
+                <span className="font-bold">UK</span>
+              </div>
+            </div>
+          )}
+          
+          {/* Registration number */}
+          <div className="text-center ml-8">
+            <div className={`text-5xl font-black tracking-wider ${getTextStyleClasses()} text-neutral-800`}>
+              {customization.registrationNumber || 'YOUR REG'}
+            </div>
+          </div>
+          
+          {/* Plate surround */}
           <div 
-            className={`font-license-plate ${getPlateBackground()} text-white border-4 rounded p-6 mx-auto max-w-md flex flex-col items-center relative overflow-hidden`}
-            style={{ borderColor: customization.borderColor }}
-          >
-            {/* Badge area */}
-            {customization.badge !== 'none' && (
-              <div className="absolute left-4 top-0 bottom-0 flex items-center">
-                <div 
-                  className={`w-12 h-12 rounded-full flex items-center justify-center text-xs ${badgeTextColor}`}
-                  style={{ backgroundColor: customization.badgeColor }}
-                >
-                  {customization.badge.toUpperCase()}
-                </div>
-              </div>
-            )}
-            
-            {/* Registration number */}
-            <div className="text-center">
-              <div className={`text-4xl font-bold tracking-wider ${getTextStyleClasses()}`}>
-                {customization.registrationNumber || 'AB12 CDE'}
-              </div>
-            </div>
-            
-            {/* Plate surround */}
-            <div 
-              className="absolute inset-0 border-8 pointer-events-none" 
-              style={{ 
-                borderColor: 
-                  customization.plateSurround === 'none' 
-                    ? 'transparent' 
-                    : customization.plateSurround === 'standard' 
-                      ? '#CED4DA' 
-                      : customization.borderColor 
-              }}
-            ></div>
-          </div>
-        </div>
-        
-        <div className="bg-neutral-50 p-4 rounded-md">
-          <h3 className="font-semibold text-lg mb-2">Order Summary</h3>
-          {orderItems.map((item) => (
-            <div key={item.id} className="flex justify-between py-1 text-sm">
-              <span className="text-neutral-600">{item.name}</span>
-              <span className="font-medium">{formatPrice(item.price)}</span>
-            </div>
-          ))}
-          <div className="border-t border-neutral-200 mt-2 pt-2">
-            <div className="flex justify-between font-semibold">
-              <span>Total</span>
-              <span className="text-primary">{formatPrice(totalPrice)}</span>
-            </div>
-          </div>
+            className="absolute inset-0 border-2 pointer-events-none" 
+            style={{ 
+              borderColor: 
+                customization.plateSurround === 'none' 
+                  ? 'transparent' 
+                  : customization.plateSurround === 'standard' 
+                    ? '#CED4DA' 
+                    : customization.borderColor 
+            }}
+          ></div>
         </div>
       </div>
       
-      <button 
-        onClick={onCheckout}
-        className="w-full bg-accent hover:bg-accent/90 text-white py-3 px-6 rounded-md font-semibold transition shadow-md flex items-center justify-center"
-      >
-        <svg className="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M5 12h14M12 5l7 7-7 7"/>
-        </svg>
-        Proceed to Checkout
-      </button>
+      {/* Yellow plate preview */}
+      <div className="w-full mb-8 p-2 bg-white rounded-md">
+        <div 
+          className="font-license-plate bg-yellow-300 text-black border-4 rounded-md p-5 mx-auto max-w-lg flex flex-col items-center relative overflow-hidden"
+          style={{ borderColor: customization.borderColor }}
+        >
+          {/* Badge area */}
+          {customization.badge !== 'none' && (
+            <div className="absolute left-2 top-0 bottom-0 flex items-center">
+              <div 
+                className={`w-12 h-16 rounded-sm flex flex-col items-center justify-center text-xs ${badgeTextColor}`}
+                style={{ backgroundColor: customization.badgeColor }}
+              >
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Flag_of_the_United_Kingdom_%283-5%29.svg/800px-Flag_of_the_United_Kingdom_%283-5%29.svg.png" alt="UK Flag" className="w-9 h-5 mb-1" />
+                <span className="font-bold">UK</span>
+              </div>
+            </div>
+          )}
+          
+          {/* Registration number */}
+          <div className="text-center ml-8">
+            <div className={`text-5xl font-black tracking-wider ${getTextStyleClasses()} text-neutral-800`}>
+              {customization.registrationNumber || 'YOUR REG'}
+            </div>
+          </div>
+          
+          {/* Plate surround */}
+          <div 
+            className="absolute inset-0 border-2 pointer-events-none" 
+            style={{ 
+              borderColor: 
+                customization.plateSurround === 'none' 
+                  ? 'transparent' 
+                  : customization.plateSurround === 'standard' 
+                    ? '#CED4DA' 
+                    : customization.borderColor 
+            }}
+          ></div>
+        </div>
+      </div>
+      
+      {/* Price and checkout button */}
+      <div className="w-full flex justify-between items-center mb-4">
+        <div className="text-2xl font-semibold">
+          Price: {formatPrice(totalPrice)}
+        </div>
+        
+        <button 
+          onClick={onCheckout}
+          className="bg-primary hover:bg-primary/90 text-white py-3 px-10 rounded-md font-semibold transition-colors shadow-md"
+        >
+          BUY NOW
+        </button>
+      </div>
+      
+      {/* Order summary details (collapsed by default) */}
+      <div className="w-full border border-neutral-200 rounded-md p-4 mt-4">
+        <h3 className="font-semibold text-lg mb-2">Order Summary</h3>
+        {orderItems.map((item) => (
+          <div key={item.id} className="flex justify-between py-1 text-sm">
+            <span className="text-neutral-600">{item.name}</span>
+            <span className="font-medium">{formatPrice(item.price)}</span>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

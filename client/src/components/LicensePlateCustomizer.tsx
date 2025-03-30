@@ -154,36 +154,12 @@ export default function LicensePlateCustomizer() {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-7xl">
-      {/* Header */}
-      <header className="mb-8">
-        <div className="flex justify-between items-center">
-          <h1 className="text-3xl font-bold text-neutral-800">License Plate Customizer</h1>
-          <div className="flex space-x-4">
-            <button className="px-3 py-2 text-neutral-600 hover:text-neutral-800 flex items-center">
-              <i className="fas fa-question-circle mr-2"></i> Help
-            </button>
-          </div>
+    <div className="flex flex-col md:flex-row overflow-hidden rounded-lg shadow-md">
+      {/* Left sidebar - Red customization panel */}
+      <div className="w-full md:w-80 bg-primary text-white flex flex-col">
+        <div className="p-4 bg-primary-900 font-semibold text-lg">
+          Select your options
         </div>
-        <div className="mt-6 bg-neutral-200 h-2 rounded-full overflow-hidden">
-          <div className="bg-primary h-full w-1/3 rounded-full"></div>
-        </div>
-        <div className="flex justify-between mt-2 text-sm text-neutral-600">
-          <span className="font-medium text-primary">1. Customize</span>
-          <span>2. Review</span>
-          <span>3. Payment</span>
-        </div>
-      </header>
-
-      {/* Main content */}
-      <div className="flex flex-col lg:flex-row gap-8">
-        {/* Plate Preview */}
-        <PlatePreview 
-          customization={plateCustomization}
-          orderItems={orderItems}
-          totalPrice={totalPrice}
-          onCheckout={handleProceedToCheckout}
-        />
         
         {/* Customization Options */}
         <CustomizationOptions 
@@ -196,6 +172,16 @@ export default function LicensePlateCustomizer() {
           textStyleOptions={textStyleOptions as any[]}
           borderColorOptions={borderColorOptions as any[]}
           plateSurroundOptions={plateSurroundOptions as any[]}
+        />
+      </div>
+      
+      {/* Right panel - Preview and pricing */}
+      <div className="w-full md:flex-1 bg-white p-6">
+        <PlatePreview 
+          customization={plateCustomization}
+          orderItems={orderItems}
+          totalPrice={totalPrice}
+          onCheckout={handleProceedToCheckout}
         />
       </div>
     </div>
