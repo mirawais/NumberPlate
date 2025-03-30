@@ -1,6 +1,8 @@
-import type { Express } from "express";
+import type { Express, Request, Response } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
+import fs from 'fs';
+import path from 'path';
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // API routes for the license plate customizer
@@ -266,6 +268,59 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error('Error updating plate type:', error);
       res.status(500).json({ success: false, message: 'Failed to update plate type' });
+    }
+  });
+
+  // Site settings management
+  const THEME_PATH = path.join(process.cwd(), 'theme.json');
+  
+  // Get current site settings
+  app.get('/api/admin/settings', (req, res) => {
+    try {
+      // Read theme.json file for color settings
+      const themeData = JSON.parse(fs.readFileSync(THEME_PATH, 'utf8'));
+      
+      // In a real implementation, you would fetch all settings from storage
+      // Here, we're just returning a mock with theme color from theme.json
+      const settings = {
+        primaryColor: themeData.primary,
+        siteName: 'Number Plate Customizer',
+        footerText: '© 2025 Number Plate Customizer. All rights reserved.',
+        showAdminLink: true,
+        showPrices: true,
+        enablePayPal: true,
+        paypalClientId: process.env.PAYPAL_CLIENT_ID || ''
+      };
+      
+      res.json(settings);
+    } catch (error) {
+      console.error('Error fetching settings:', error);
+      res.status(500).json({ success: false, message: 'Failed to fetch settings' });
+    }
+  });
+  
+  // Update site settings
+  app.patch('/api/admin/settings', (req, res) => {
+    try {
+      const { primaryColor, ...otherSettings } = req.body;
+      
+      // Update theme.json with new primary color
+      if (primaryColor) {
+        const themeData = JSON.parse(fs.readFileSync(THEME_PATH, 'utf8'));
+        themeData.primary = primaryColor;
+        fs.writeFileSync(THEME_PATH, JSON.stringify(themeData, null, 2));
+      }
+      
+      // In a real implementation, you would save all settings to storage
+      
+      res.json({ 
+        success: true, 
+        message: 'Settings updated successfully',
+        settings: req.body
+      });
+    } catch (error) {
+      console.error('Error updating settings:', error);
+      res.status(500).json({ success: false, message: 'Failed to update settings' });
     }
   });
 
