@@ -125,30 +125,34 @@ export class MemStorage implements IStorage {
       price: 34.99
     });
 
-    // Initialize badges
+    // Initialize badges with default images
     this.badges.set(this.currentBadgeId++, {
       id: 1,
       name: 'GB Badge',
       code: 'gb',
-      price: 4.99
+      price: 4.99,
+      imageUrl: '/img/badges/gb_flag.svg'
     });
     this.badges.set(this.currentBadgeId++, {
       id: 2,
       name: 'EU Badge',
       code: 'eu',
-      price: 4.99
+      price: 4.99,
+      imageUrl: '/img/badges/eu_flag.svg'
     });
     this.badges.set(this.currentBadgeId++, {
       id: 3,
       name: 'UK Badge',
       code: 'uk',
-      price: 4.99
+      price: 4.99,
+      imageUrl: '/img/badges/uk_flag.svg'
     });
     this.badges.set(this.currentBadgeId++, {
       id: 4,
       name: 'None',
       code: 'none',
-      price: 0
+      price: 0,
+      imageUrl: ''
     });
 
     // Initialize badge colors

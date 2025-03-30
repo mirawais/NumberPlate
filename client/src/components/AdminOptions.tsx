@@ -60,7 +60,8 @@ export default function AdminOptions() {
       id: 0,
       name: '',
       code: '',
-      price: 0
+      price: 0,
+      imageUrl: ''
     }
   });
   
@@ -69,7 +70,8 @@ export default function AdminOptions() {
       id: 0,
       name: '',
       code: '',
-      price: 0
+      price: 0,
+      imageUrl: ''
     });
     setEditingBadge(null);
   };
@@ -482,6 +484,7 @@ export default function AdminOptions() {
                     <TableHead>Name</TableHead>
                     <TableHead>Code</TableHead>
                     <TableHead>Price</TableHead>
+                    <TableHead>Image</TableHead>
                     <TableHead className="text-right">Actions</TableHead>
                   </TableRow>
                 </TableHeader>
@@ -492,6 +495,15 @@ export default function AdminOptions() {
                       <TableCell>{badge.name}</TableCell>
                       <TableCell>{badge.code}</TableCell>
                       <TableCell>{formatPrice(badge.price)}</TableCell>
+                      <TableCell>
+                        {badge.imageUrl && (
+                          <img 
+                            src={badge.imageUrl} 
+                            alt={badge.name} 
+                            className="w-10 h-auto object-contain"
+                          />
+                        )}
+                      </TableCell>
                       <TableCell className="text-right">
                         <Button variant="ghost" size="sm" onClick={() => handleEditBadge(badge)}>
                           Edit
@@ -562,6 +574,66 @@ export default function AdminOptions() {
                             onChange={(e) => field.onChange(parseFloat(e.target.value))}
                           />
                         </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={badgeForm.control}
+                    name="imageUrl"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Badge Image</FormLabel>
+                        <div className="space-y-2">
+                          <FormControl>
+                            <Input 
+                              placeholder="/img/badges/gb_flag.svg" 
+                              {...field} 
+                            />
+                          </FormControl>
+                          <FormDescription>
+                            Enter image URL or choose from available options:
+                          </FormDescription>
+                          <div className="flex gap-2 mt-2">
+                            <Button 
+                              type="button" 
+                              variant="outline" 
+                              size="sm"
+                              onClick={() => field.onChange('/img/badges/gb_flag.svg')}
+                            >
+                              GB Flag
+                            </Button>
+                            <Button 
+                              type="button" 
+                              variant="outline" 
+                              size="sm"
+                              onClick={() => field.onChange('/img/badges/eu_flag.svg')}
+                            >
+                              EU Flag
+                            </Button>
+                            <Button 
+                              type="button" 
+                              variant="outline" 
+                              size="sm"
+                              onClick={() => field.onChange('/img/badges/uk_flag.svg')}
+                            >
+                              UK Flag
+                            </Button>
+                          </div>
+                          {field.value && (
+                            <div className="mt-2">
+                              <p className="text-sm font-medium mb-1">Preview:</p>
+                              <div className="border rounded p-2 w-fit">
+                                <img 
+                                  src={field.value} 
+                                  alt="Badge preview" 
+                                  className="h-8 w-auto"
+                                />
+                              </div>
+                            </div>
+                          )}
+                        </div>
                         <FormMessage />
                       </FormItem>
                     )}

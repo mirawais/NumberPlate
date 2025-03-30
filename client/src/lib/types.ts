@@ -3,6 +3,7 @@ export interface Badge {
   name: string;
   code: string;
   price: number;
+  imageUrl?: string;
 }
 
 export interface BadgeColor {

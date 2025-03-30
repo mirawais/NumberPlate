@@ -40,12 +40,14 @@ export const badges = pgTable("badges", {
   name: text("name").notNull(),
   code: text("code").notNull().unique(),
   price: doublePrecision("price").notNull().default(0),
+  imageUrl: text("imageUrl"),
 });
 
 export const insertBadgeSchema = createInsertSchema(badges).pick({
   name: true,
   code: true,
   price: true,
+  imageUrl: true,
 });
 
 export type InsertBadge = z.infer<typeof insertBadgeSchema>;

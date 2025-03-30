@@ -299,8 +299,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
   
-  // Update site settings
-  app.patch('/api/admin/settings', (req, res) => {
+  // Update site settings - supporting both POST and PATCH methods
+  app.post('/api/admin/settings', updateSettings);
+  app.patch('/api/admin/settings', updateSettings);
+  
+  // Helper function for handling settings updates
+  function updateSettings(req: Request, res: Response) {
     try {
       const { primaryColor, ...otherSettings } = req.body;
       
@@ -322,7 +326,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       console.error('Error updating settings:', error);
       res.status(500).json({ success: false, message: 'Failed to update settings' });
     }
-  });
+  }
 
   return httpServer;
 }

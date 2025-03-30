@@ -39,6 +39,35 @@ export default function PlatePreview({
         return 'bg-primary';
     }
   };
+
+  // Function to render badge content
+  const renderBadgeContent = () => {
+    switch (customization.badge) {
+      case 'gb':
+        return (
+          <>
+            <img src="/img/badges/gb_flag.svg" alt="GB Flag" className="w-9 h-5 mb-1" />
+            <span className="font-bold">GB</span>
+          </>
+        );
+      case 'eu':
+        return (
+          <>
+            <img src="/img/badges/eu_flag.svg" alt="EU Flag" className="w-9 h-5 mb-1" />
+            <span className="font-bold">EU</span>
+          </>
+        );
+      case 'uk':
+        return (
+          <>
+            <img src="/img/badges/uk_flag.svg" alt="UK Flag" className="w-9 h-5 mb-1" />
+            <span className="font-bold">UK</span>
+          </>
+        );
+      default:
+        return null;
+    }
+  };
   
   return (
     <div className="flex flex-col items-center w-full">
@@ -55,8 +84,7 @@ export default function PlatePreview({
                 className={`w-12 h-16 rounded-sm flex flex-col items-center justify-center text-xs ${badgeTextColor}`}
                 style={{ backgroundColor: customization.badgeColor }}
               >
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Flag_of_the_United_Kingdom_%283-5%29.svg/800px-Flag_of_the_United_Kingdom_%283-5%29.svg.png" alt="UK Flag" className="w-9 h-5 mb-1" />
-                <span className="font-bold">UK</span>
+                {renderBadgeContent()}
               </div>
             </div>
           )}
@@ -96,8 +124,7 @@ export default function PlatePreview({
                 className={`w-12 h-16 rounded-sm flex flex-col items-center justify-center text-xs ${badgeTextColor}`}
                 style={{ backgroundColor: customization.badgeColor }}
               >
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Flag_of_the_United_Kingdom_%283-5%29.svg/800px-Flag_of_the_United_Kingdom_%283-5%29.svg.png" alt="UK Flag" className="w-9 h-5 mb-1" />
-                <span className="font-bold">UK</span>
+                {renderBadgeContent()}
               </div>
             </div>
           )}
